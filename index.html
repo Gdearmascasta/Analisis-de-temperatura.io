@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualización de Anomalías de Temperatura</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Anomalías de Temperatura Globales</h1>
+    </header>
+    <section class="description">
+        <h2>Descripción de los Datos</h2>
+        <p>
+          <strong>ANOMALÍAS DE TEMPERATURA ANUAL</strong><br>
+          Diferencia entre la temperatura media superficial de un año específico y la media del período 1991–2020, en grados Celsius.
+          Los datos de 2024 están incompletos y fueron actualizados por última vez el 31 de mayo de 2025.<br>
+          <strong>Fuente:</strong> Contiene información modificada del Servicio de Cambio Climático de Copernicus (2025) – con procesamiento principal realizado por Our World in Data<br>
+          <strong>Última actualización:</strong> 7 de enero de 2025<br>
+          <strong>Rango de fechas:</strong> 2020–2024<br>
+          <strong>Unidad:</strong> °C<br>
+          <strong>Enlace de la fuente:</strong> <a href="https://ourworldindata.org/grapher/temperature-anomaly" target="_blank">https://ourworldindata.org/grapher/temperature-anomaly</a>
+        </p>
+    </section>
+    <section>
+  <h2>Análisis disponibles y su utilidad</h2>
+
+  <article>
+    <h3>1. Mapa de calor (Heatmap)</h3>
+    <p><strong>Tipo de análisis:</strong> Visualización espacial y temporal de datos.</p>
+    <p><strong>Utilidad:</strong></p>
+    <ul>
+      <li>Permite identificar <strong>zonas geográficas o periodos específicos</strong> con mayores o menores anomalías de temperatura.</li>
+      <li>Facilita la <strong>detección de patrones</strong> (por ejemplo, regiones constantemente más cálidas o más frías que el promedio).</li>
+      <li>Es útil para comunicar rápidamente a los usuarios <strong>dónde</strong> están ocurriendo las anomalías y su intensidad.</li>
+    </ul>
+    <p><strong>¿Por qué es importante?</strong></p>
+    <ul>
+      <li>Ayuda a <strong>entender la distribución espacial</strong> de las anomalías.</li>
+      <li>Ideal para presentar datos a usuarios no técnicos de forma intuitiva.</li>
+      <li>Apoya en la toma de decisiones para estudios climáticos, ambientales o urbanísticos.</li>
+    </ul>
+  </article>
+
+  <article>
+    <h3>2. Histograma</h3>
+    <p><strong>Tipo de análisis:</strong> Análisis de distribución de datos.</p>
+    <p><strong>Utilidad:</strong></p>
+    <ul>
+      <li>Muestra <strong>cómo se distribuyen las anomalías de temperatura</strong> en un periodo o área determinada.</li>
+      <li>Ayuda a detectar <strong>asimetrías, concentraciones o valores extremos</strong> (outliers).</li>
+      <li>Permite observar si las anomalías siguen una distribución normal o si hay sesgos.</li>
+    </ul>
+    <p><strong>¿Por qué es importante?</strong></p>
+    <ul>
+      <li>Permite <strong>cuantificar y entender la frecuencia</strong> de diferentes niveles de anomalías.</li>
+      <li>Clave para aplicar modelos estadísticos y validar hipótesis (como cambios climáticos significativos).</li>
+      <li>Ayuda a comunicar si las anomalías son comunes o excepcionales.</li>
+    </ul>
+  </article>
+
+  <article>
+    <h3>Conclusión</h3>
+    <p>Ambas herramientas cumplen roles complementarios:</p>
+    <ul>
+      <li>El <strong>mapa de calor</strong> responde a <em>dónde y cuándo</em> ocurren las anomalías.</li>
+      <li>El <strong>histograma</strong> responde a <em>cuántas veces</em> y <em>con qué intensidad</em> ocurren.</li>
+    </ul>
+    <p>Usarlos juntos permite ofrecer una <strong>visión completa, clara y comprensible</strong> de los datos de temperatura en tu página.</p>
+  </article>
+</section>
+    <header>
+        <h1>Anomalías de Temperatura Globales (2024)</h1>
+        <p>Visualización interactiva de anomalías de temperatura por país</p>
+    </header>
+    <section id="controls">
+        <label for="country-select">Filtrar por país:</label>
+        <select id="country-select">
+            <option value="all">Todos</option>
+        </select>
+        <label for="anomaly-range">Rango de anomalía:</label>
+        <input type="range" id="anomaly-range" min="-2" max="4" step="0.1" value="4">
+        <span id="anomaly-value">≤ 4</span>
+    </section>
+    <main>
+        <div id="map" style="height: 500px;"></div>
+        <div id="charts">
+            <canvas id="time-series-chart"></canvas>
+        </div>
+        <select id="countrySelect"></select>
+        <canvas id="histogramChart"></canvas>
+    </main>
+    <section class="analysis">
+        <h2>Análisis de Datos</h2>
+        <p>
+          Visualizar las anomalías de temperatura es crucial para la toma de decisiones en políticas ambientales y climáticas. 
+          Los datos permiten identificar tendencias a largo plazo, evaluar el impacto del cambio climático y planificar acciones 
+          para mitigar sus efectos. Además, la representación gráfica facilita la comprensión de la información, 
+          lo que puede influir en la opinión pública y en la formulación de políticas.
+        </p>
+        <p>
+          Las notables variaciones de temperatura observadas en las últimas décadas reflejan una aceleración del calentamiento global, 
+          con años cada vez más cálidos que superan los promedios históricos. Este fenómeno ha generado un aumento en la frecuencia 
+          e intensidad de eventos extremos como olas de calor, sequías, inundaciones y tormentas, afectando directamente a millones 
+          de personas en todo el mundo.
+        </p>
+        <p>
+          Estos cambios tienen implicaciones significativas en diversas áreas. En salud pública, el aumento de la temperatura puede 
+          favorecer la propagación de enfermedades infecciosas, agravar problemas respiratorios y aumentar la mortalidad en poblaciones vulnerables. 
+          En la economía, sectores como la agricultura, el turismo y la infraestructura enfrentan grandes desafíos debido a la variabilidad climática 
+          y a los desastres naturales cada vez más frecuentes.
+        </p>
+        <p>
+          A nivel global, la conciencia sobre el cambio climático ha incrementado la presión sobre los gobiernos para implementar políticas 
+          climáticas más ambiciosas, como la transición hacia energías renovables, la adopción de tecnologías limpias y la promoción 
+          de modelos económicos sostenibles. El análisis de estos datos no solo es una herramienta científica, sino también un insumo esencial 
+          para la acción colectiva y la responsabilidad social frente a uno de los mayores retos del siglo XXI.
+        </p>
+    <footer>
+        <p>Fuente de datos: <em>annual-temperature-anomalies.csv</em></p>
+    </footer>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
