@@ -1,0 +1,1 @@
+This repository contains a temperature variation analysis with a heatmap and trend line. Explore global climate patterns interactively. https://anomaliasfinal.tiiny.site
